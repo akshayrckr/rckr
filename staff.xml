@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfStaff xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/staffmanagement">
+  <Staff i:type="Teaching">
+    <Address>testingsdaw</Address>
+    <Email>tester</Email>
+    <Name>test1</Name>
+    <Phone>92282</Phone>
+    <Staff_ID>2252</Staff_ID>
+    <Type>Teaching</Type>
+    <Experience>5</Experience>
+  </Staff>
+  <Staff i:type="Support">
+    <Address>asxx</Address>
+    <Email>sahiha</Email>
+    <Name>asa</Name>
+    <Phone>99081</Phone>
+    <Staff_ID>987282</Staff_ID>
+    <Type>Support</Type>
+    <Position>jbjs</Position>
+  </Staff>
+  <Staff i:type="Support">
+    <Address>f</Address>
+    <Email>f</Email>
+    <Name>f</Name>
+    <Phone>424</Phone>
+    <Staff_ID>424</Staff_ID>
+    <Type>Support</Type>
+    <Position>f</Position>
+  </Staff>
+</ArrayOfStaff>
