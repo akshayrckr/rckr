@@ -17,15 +17,7 @@ namespace staffmanagement.DataLayer
         {
             Console.WriteLine("Staff Managment System");
             MenuOperations menu = new MenuOperations();
-            //IData dataLayer = new JsonDataLayer();
-            Staff admin = new Admin(222,"test","testing","tester",92282,"low");
-            Staff teacher = new Teaching(2252, "test1", "testingsdaw", "tester", 92282, 5);
-            Staff support = new Support(222, "test", "testing", "tester", 92282, "testing agent");
-            XmlDataLayer dataLayer = new XmlDataLayer();
-            //dataLayer.WriteAll(staffs);
-            
-
-
+            IData dataLayer = new XmlDataLayer();
 
             while (true)
             {
