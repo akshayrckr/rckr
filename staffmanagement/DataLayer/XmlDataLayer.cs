@@ -18,7 +18,7 @@ namespace staffmanagement.DataLayer
 
         public void WriteAll(List<Staff> allstaffs)
         {
-            if (File.Exists(Filepath)) File.Delete(Filepath);
+            if (File.Exists(Filepath)) ;
             FileStream fs = new FileStream(Filepath, FileMode.Create);
 
             // For Formatting

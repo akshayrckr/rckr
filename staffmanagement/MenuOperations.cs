@@ -96,7 +96,8 @@ namespace staffmanagement.DataLayer
         {
             foreach(Staff e in staffs)
             {
-                if (e.Type == type)
+                if (String.Equals(e.Type, (string)type["type"],
+                   StringComparison.OrdinalIgnoreCase))
                 {
                     ViewStaff(e);
                 }
