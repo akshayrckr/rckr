@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\admin\\Source\\Repos\\staffmanagement\\staffmanagement\\staffmanagement.csproj": {}
+    "C:\\Users\\admin\\Source\\Repos\\staffmanagement\\rckr\\staffmanagement\\staffmanagement.csproj": {}
   },
   "projects": {
-    "C:\\Users\\admin\\Source\\Repos\\staffmanagement\\staffmanagement\\staffmanagement.csproj": {
+    "C:\\Users\\admin\\Source\\Repos\\staffmanagement\\rckr\\staffmanagement\\staffmanagement.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\admin\\Source\\Repos\\staffmanagement\\staffmanagement\\staffmanagement.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Source\\Repos\\staffmanagement\\rckr\\staffmanagement\\staffmanagement.csproj",
         "projectName": "staffmanagement",
-        "projectPath": "C:\\Users\\admin\\Source\\Repos\\staffmanagement\\staffmanagement\\staffmanagement.csproj",
+        "projectPath": "C:\\Users\\admin\\Source\\Repos\\staffmanagement\\rckr\\staffmanagement\\staffmanagement.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\admin\\Source\\Repos\\staffmanagement\\staffmanagement\\obj\\",
+        "outputPath": "C:\\Users\\admin\\Source\\Repos\\staffmanagement\\rckr\\staffmanagement\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

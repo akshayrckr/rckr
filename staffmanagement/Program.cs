@@ -20,10 +20,7 @@ namespace staffmanagement.DataLayer
             //IData dataLayer = new JsonDataLayer();
             Staff admin = new Admin(222,"test","testing","tester",92282,"low");
             Staff teacher = new Teaching(2252, "test1", "testingsdaw", "tester", 92282, 5);
-            Staff support = new Support(222, "test", "testing", "tester", 92282, "doggy style");
-          
-
-
+            Staff support = new Support(222, "test", "testing", "tester", 92282, "testing agent");
             XmlDataLayer dataLayer = new XmlDataLayer();
             //dataLayer.WriteAll(staffs);
             
