@@ -17,33 +17,35 @@ namespace Data.Impl
         }
         public void WriteAll(List<Staff> allstaffs)
         {
-            if (File.Exists(Filepath));
-            using (FileStream fs = new FileStream(Filepath, FileMode.Create))
-            {
-                // For Formatting
-                XmlWriterSettings settings = new XmlWriterSettings
+            
+            
+                using (FileStream fs = new FileStream(Filepath, FileMode.Create))
                 {
-                    Encoding = Encoding.UTF8,
-                    Indent = true,
-                    CloseOutput = true
-                };
-                using (XmlWriter writer = XmlWriter.Create(fs, settings))
-                {
+                    // For Formatting
+                    XmlWriterSettings settings = new XmlWriterSettings
+                    {
+                        Encoding = Encoding.UTF8,
+                        Indent = true,
+                        CloseOutput = true
+                    };
+                    using (XmlWriter writer = XmlWriter.Create(fs, settings))
+                    {
 
-                    DataContractSerializer ser = new DataContractSerializer(typeof(List<Staff>));
+                        DataContractSerializer ser = new DataContractSerializer(typeof(List<Staff>));
 
-                    ser.WriteObject(writer, allstaffs);
-                    writer.Close();
-                    fs.Close();
+                        ser.WriteObject(writer, allstaffs);
+                        writer.Close();
+                        fs.Close();
+                    }
                 }
-            }
+            
         }
         public List<Staff> ReadFromFile()
         {
             List<Staff> staffs = new List<Staff>();
 
-            if (File.Exists(Filepath))
-            {
+            
+            
                 using (FileStream fs = new FileStream(Filepath, FileMode.Open))
                 {
 
@@ -58,7 +60,7 @@ namespace Data.Impl
                         reader.Close();
                     }
                 }
-            }
+            
        
             return staffs;
             

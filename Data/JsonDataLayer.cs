@@ -8,17 +8,15 @@ namespace Data.Impl
 {
     class JsonDataLayer : IData
     {
-        
-        string filepath ;
 
-        public JsonDataLayer()
+        string filepath; 
+       public JsonDataLayer()
         {
             filepath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "employee.json");
         }
-
         public void Create(Staff staffToCreate)
         {
-            List<Staff> allStaff =JsonConvert.DeserializeObject<List<Staff>>(File.ReadAllText(filepath), new JsonSerializerSettings
+           List<Staff> allStaff = JsonConvert.DeserializeObject<List<Staff>>(File.ReadAllText(filepath), new JsonSerializerSettings
            {
                 TypeNameHandling = TypeNameHandling.Auto,
                 NullValueHandling = NullValueHandling.Ignore,
@@ -36,7 +34,6 @@ namespace Data.Impl
             {
                 serializer.Serialize(writer, allStaff, typeof(List<Staff>));
             }
-            
         }
 
 
