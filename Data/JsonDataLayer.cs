@@ -9,11 +9,11 @@ namespace Data.Impl
     class JsonDataLayer : IData
     {
         
-        string filepath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "employee.json");
+        string filepath ;
 
         public JsonDataLayer()
         {
-
+            filepath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "employee.json");
         }
 
         public void Create(Staff staffToCreate)
