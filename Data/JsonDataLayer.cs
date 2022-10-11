@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using Library;
 using Newtonsoft.Json;
 
-namespace staffmanagement.DataLayer
+namespace Data
 {
     class JsonDataLayer : IData
     {
@@ -13,21 +13,21 @@ namespace staffmanagement.DataLayer
        
         public void Create(Staff staffToCreate)
         {
-           List<Staff> allStaff = JsonConvert.DeserializeObject<List<Staff>>(File.ReadAllText(filepath), new Newtonsoft.Json.JsonSerializerSettings
-            {
-                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
-                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+           List<Staff> allStaff = JsonConvert.DeserializeObject<List<Staff>>(File.ReadAllText(filepath), new JsonSerializerSettings
+           {
+                TypeNameHandling = TypeNameHandling.Auto,
+                NullValueHandling = NullValueHandling.Ignore,
             });
             allStaff.Add(staffToCreate);
 
-            Newtonsoft.Json.JsonSerializer serializer = new Newtonsoft.Json.JsonSerializer();
+            JsonSerializer serializer = new JsonSerializer();
           
-            serializer.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-            serializer.TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto;
-            serializer.Formatting = Newtonsoft.Json.Formatting.Indented;
+            serializer.NullValueHandling = NullValueHandling.Ignore;
+            serializer.TypeNameHandling = TypeNameHandling.Auto;
+            serializer.Formatting = Formatting.Indented;
 
             using (StreamWriter sw = new StreamWriter(filepath))
-            using (Newtonsoft.Json.JsonWriter writer = new Newtonsoft.Json.JsonTextWriter(sw))
+            using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, allStaff, typeof(List<Staff>));
             }

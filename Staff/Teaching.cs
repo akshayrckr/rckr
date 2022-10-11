@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
-namespace staffmanagement
+namespace Library
 {
     [Serializable]
     [DataContract()]
-    class Teaching : Staff
+    public class Teaching : Staff
     {
         [DataMember()]
         public int Experience { get; set; }

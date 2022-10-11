@@ -1,23 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.IO;
-using Newtonsoft.Json.Linq;
+using System.Configuration;
+using System.Reflection;
+using Library;
 
-namespace staffmanagement.DataLayer
+namespace StaffManagement
 {
     class Program
     {
-        
-
         static void Main(string[] args)
-        {
+        { 
+            string dllpath = "C:/Users/admin/Source/Repos/staffmanagement/rckr/Data/bin/Debug/netcoreapp3.1/Data.dll";
+            Assembly assembly = Assembly.LoadFile(dllpath);
+            IData dataLayer = null;
+
             Console.WriteLine("Staff Managment System");
             MenuOperations menu = new MenuOperations();
-            IData dataLayer = new XmlDataLayer();
+            string file = ConfigurationManager.AppSettings["file"].ToUpper();
+            if (file.Equals("XML"))
+            {
+                Type type = assembly.GetType("Data.XmlDataLayer");
+                dataLayer = Activator.CreateInstance(type) as IData;
+                
+            }
+            else if (file.Equals("JSON"))
+            {
+
+                Type type = assembly.GetType("Data.JsonDataLayer");
+                 dataLayer = Activator.CreateInstance(type) as IData;
+                
+            }
+            else
+            {
+                Console.WriteLine("no storage found");
+            }
+
 
             while (true)
             {
@@ -51,7 +68,7 @@ namespace staffmanagement.DataLayer
                         {
                             Console.WriteLine("write department to view ");
                             string dep = Console.ReadLine();
-                            List<Staff>staffs = dataLayer.ReadByType(dep);
+                            List<Staff> staffs = dataLayer.ReadByType(dep);
                             menu.ViewStaff(staffs);
                         }
 
@@ -130,5 +147,8 @@ namespace staffmanagement.DataLayer
         }
     }
 }
+
+    
+
 
 

@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.IO;
-using Newtonsoft.Json.Linq;
-using System.Xml.Serialization;
-using System.Xml;
+using Library;
 
-namespace staffmanagement.DataLayer
+namespace StaffManagement
 {
     class MenuOperations
     {
@@ -96,8 +89,7 @@ namespace staffmanagement.DataLayer
         {
             foreach(Staff e in staffs)
             {
-                if (String.Equals(e.Type, (string)type["type"],
-                   StringComparison.OrdinalIgnoreCase))
+                if (e.Type == type)
                 {
                     ViewStaff(e);
                 }

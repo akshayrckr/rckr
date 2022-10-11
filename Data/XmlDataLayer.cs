@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-using System.Xml.Serialization;
-using System.Xml.Linq;
 using System.Xml;
 using System.Runtime.Serialization;
+using Library;
 
-namespace staffmanagement.DataLayer
-
+namespace Data
 {
     class XmlDataLayer : IData
     {
@@ -18,14 +16,16 @@ namespace staffmanagement.DataLayer
 
         public void WriteAll(List<Staff> allstaffs)
         {
-            if (File.Exists(Filepath)) ;
+            if (File.Exists(Filepath));
             FileStream fs = new FileStream(Filepath, FileMode.Create);
 
             // For Formatting
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Encoding = Encoding.UTF8;
-            settings.Indent = true;
-            settings.CloseOutput = true;
+            XmlWriterSettings settings = new XmlWriterSettings
+            {
+                Encoding = Encoding.UTF8,
+                Indent = true,
+                CloseOutput = true
+            };
 
             XmlWriter writer = XmlWriter.Create(fs, settings);
 

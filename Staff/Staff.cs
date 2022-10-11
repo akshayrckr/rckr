@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
-using Newtonsoft.Json;
 
-namespace staffmanagement
+namespace Library
+
 {   [Serializable]
     [DataContract()]
     [KnownType (typeof(Admin))]
