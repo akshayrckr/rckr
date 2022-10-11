@@ -10,29 +10,33 @@ namespace Data.Impl
 {
     class XmlDataLayer : IData
     {
-        public string Filepath = "C:\\Users\\admin\\Source\\Repos\\staffmanagement\\staff.xml";
-
+        string Filepath ; 
+        public XmlDataLayer()
+        {
+            Filepath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "staff.xml");
+        }
         public void WriteAll(List<Staff> allstaffs)
         {
             if (File.Exists(Filepath));
-            FileStream fs = new FileStream(Filepath, FileMode.Create);
-
-            // For Formatting
-            XmlWriterSettings settings = new XmlWriterSettings
+            using (FileStream fs = new FileStream(Filepath, FileMode.Create))
             {
-                Encoding = Encoding.UTF8,
-                Indent = true,
-                CloseOutput = true
-            };
+                // For Formatting
+                XmlWriterSettings settings = new XmlWriterSettings
+                {
+                    Encoding = Encoding.UTF8,
+                    Indent = true,
+                    CloseOutput = true
+                };
+                using (XmlWriter writer = XmlWriter.Create(fs, settings))
+                {
 
-            XmlWriter writer = XmlWriter.Create(fs, settings);
+                    DataContractSerializer ser = new DataContractSerializer(typeof(List<Staff>));
 
-            DataContractSerializer ser = new DataContractSerializer(typeof(List<Staff>));
-
-            ser.WriteObject(writer, allstaffs);
-            writer.Close();
-            fs.Close();
-
+                    ser.WriteObject(writer, allstaffs);
+                    writer.Close();
+                    fs.Close();
+                }
+            }
         }
         public List<Staff> ReadFromFile()
         {
@@ -40,16 +44,20 @@ namespace Data.Impl
 
             if (File.Exists(Filepath))
             {
-                FileStream fs = new FileStream(Filepath, FileMode.Open);
+                using (FileStream fs = new FileStream(Filepath, FileMode.Open))
+                {
 
-                XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
+                    using (XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas()))
+                    {
 
-                DataContractSerializer serializer = new DataContractSerializer(typeof(List<Staff>));
+                        DataContractSerializer serializer = new DataContractSerializer(typeof(List<Staff>));
 
-                staffs = (List<Staff>)serializer.ReadObject(reader, true);
+                        staffs = (List<Staff>)serializer.ReadObject(reader, true);
 
-                fs.Close();
-                reader.Close();
+                        fs.Close();
+                        reader.Close();
+                    }
+                }
             }
        
             return staffs;
@@ -106,7 +114,7 @@ namespace Data.Impl
             List<Staff> allStaffs = ReadFromFile();
             var getStaffs = allStaffs.FindAll(x => x.Type == staffTypeToRead);
             return getStaffs;
-            throw new NotImplementedException();
+          
         }
     }
         }

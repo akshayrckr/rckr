@@ -10,7 +10,12 @@ namespace Data.Impl
     {
         
         string filepath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "employee.json");
-       
+
+        public JsonDataLayer()
+        {
+
+        }
+
         public void Create(Staff staffToCreate)
         {
             List<Staff> allStaff =JsonConvert.DeserializeObject<List<Staff>>(File.ReadAllText(filepath), new JsonSerializerSettings

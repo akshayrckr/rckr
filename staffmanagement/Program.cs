@@ -10,12 +10,11 @@ namespace StaffManagement
     {
         static void Main(string[] args)
         { 
-            string dllpath = "C:/Users/admin/Source/Repos/staffmanagement/rckr/Data/bin/Debug/netcoreapp3.1/StaffManagement.DataLayer.dll";
-            Assembly assembly = Assembly.LoadFile(dllpath);
+            
             IData dataLayer = null;
             MenuOperations menu = new MenuOperations();
             string file = ConfigurationManager.AppSettings["file"];
-            Type type = assembly.GetType(file);
+            Type type = Type.GetType(file);
             dataLayer = Activator.CreateInstance(type) as IData;
             Console.WriteLine("Staff Managment System");
 
