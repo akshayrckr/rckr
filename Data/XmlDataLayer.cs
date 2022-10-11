@@ -6,13 +6,11 @@ using System.Xml;
 using System.Runtime.Serialization;
 using Library;
 
-namespace Data
+namespace Data.Impl
 {
     class XmlDataLayer : IData
     {
-
-        //C:\Users\admin\Source\Repos\staffmanagement
-        public string Filepath { get; } = "C:\\Users\\admin\\Source\\Repos\\staffmanagement\\staff.xml";
+        public string Filepath = "C:\\Users\\admin\\Source\\Repos\\staffmanagement\\staff.xml";
 
         public void WriteAll(List<Staff> allstaffs)
         {
@@ -36,7 +34,7 @@ namespace Data
             fs.Close();
 
         }
-        public List<Staff> Read()
+        public List<Staff> ReadFromFile()
         {
             List<Staff> staffs = new List<Staff>();
 
@@ -63,15 +61,15 @@ namespace Data
 
         public void Create(Staff staffToCreate)
         {
-            //List<Staff> allStaffs = new List<Staff>();
-           List<Staff> allStaffs = Read();
+            
+           List<Staff> allStaffs = ReadFromFile();
             allStaffs.Add(staffToCreate);
             WriteAll(allStaffs);
         }
 
         public void Update(Staff staffToUpdate)
         {
-            List<Staff> allStaffs = Read();
+            List<Staff> allStaffs = ReadFromFile();
             var getStaff = allStaffs.Find(x => x.Staff_ID == staffToUpdate.Staff_ID);
 
             if (getStaff != null)
@@ -84,20 +82,20 @@ namespace Data
 
         public void Delete(int staffIdToDelete)
         {
-            List<Staff> allStaffs = Read();
+            List<Staff> allStaffs = ReadFromFile();
             allStaffs.RemoveAll(e => e.Staff_ID == staffIdToDelete);
             WriteAll(allStaffs);
         }
 
         public List<Staff> ReadAll()
         {
-            List<Staff> allStaffs = Read();
+            List<Staff> allStaffs = ReadFromFile();
             return allStaffs;
         }
 
         public Staff Read(int staffIdToRead)
         {
-            List<Staff> allStaffs = Read();
+            List<Staff> allStaffs = ReadFromFile();
             var staff = allStaffs.Find(x => x.Staff_ID == staffIdToRead);
             return staff;
             
@@ -105,7 +103,7 @@ namespace Data
 
         public List<Staff> ReadByType(string staffTypeToRead)
         {
-            List<Staff> allStaffs = Read();
+            List<Staff> allStaffs = ReadFromFile();
             var getStaffs = allStaffs.FindAll(x => x.Type == staffTypeToRead);
             return getStaffs;
             throw new NotImplementedException();

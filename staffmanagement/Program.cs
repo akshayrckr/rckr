@@ -10,31 +10,14 @@ namespace StaffManagement
     {
         static void Main(string[] args)
         { 
-            string dllpath = "C:/Users/admin/Source/Repos/staffmanagement/rckr/Data/bin/Debug/netcoreapp3.1/Data.dll";
+            string dllpath = "C:/Users/admin/Source/Repos/staffmanagement/rckr/Data/bin/Debug/netcoreapp3.1/StaffManagement.DataLayer.dll";
             Assembly assembly = Assembly.LoadFile(dllpath);
             IData dataLayer = null;
-
-            Console.WriteLine("Staff Managment System");
             MenuOperations menu = new MenuOperations();
-            string file = ConfigurationManager.AppSettings["file"].ToUpper();
-            if (file.Equals("XML"))
-            {
-                Type type = assembly.GetType("Data.XmlDataLayer");
-                dataLayer = Activator.CreateInstance(type) as IData;
-                
-            }
-            else if (file.Equals("JSON"))
-            {
-
-                Type type = assembly.GetType("Data.JsonDataLayer");
-                 dataLayer = Activator.CreateInstance(type) as IData;
-                
-            }
-            else
-            {
-                Console.WriteLine("no storage found");
-            }
-
+            string file = ConfigurationManager.AppSettings["file"];
+            Type type = assembly.GetType(file);
+            dataLayer = Activator.CreateInstance(type) as IData;
+            Console.WriteLine("Staff Managment System");
 
             while (true)
             {
