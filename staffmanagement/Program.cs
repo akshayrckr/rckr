@@ -1,34 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.IO;
-using Newtonsoft.Json.Linq;
+using System.Configuration;
+using System.Reflection;
+using Library;
 
-namespace staffmanagement.DataLayer
+namespace StaffManagement
 {
     class Program
     {
-        
-
         static void Main(string[] args)
-        {
-            Console.WriteLine("Staff Managment System");
-            MenuOperations menu = new MenuOperations();
-            //IData dataLayer = new JsonDataLayer();
-            Staff admin = new Admin(222,"test","testing","tester",92282,"low");
-            Staff teacher = new Teaching(2252, "test1", "testingsdaw", "tester", 92282, 5);
-            Staff support = new Support(222, "test", "testing", "tester", 92282, "doggy style");
-          
-
-
-            XmlDataLayer dataLayer = new XmlDataLayer();
-            //dataLayer.WriteAll(staffs);
+        { 
             
-
-
+            IData dataLayer = null;
+            MenuOperations menu = new MenuOperations();
+            string file = ConfigurationManager.AppSettings["file"];
+            Type type = Type.GetType(file);
+            dataLayer = Activator.CreateInstance(type) as IData;
+            Console.WriteLine("Staff Managment System");
 
             while (true)
             {
@@ -62,7 +50,7 @@ namespace staffmanagement.DataLayer
                         {
                             Console.WriteLine("write department to view ");
                             string dep = Console.ReadLine();
-                            List<Staff>staffs = dataLayer.ReadByType(dep);
+                            List<Staff> staffs = dataLayer.ReadByType(dep);
                             menu.ViewStaff(staffs);
                         }
 
@@ -141,5 +129,8 @@ namespace staffmanagement.DataLayer
         }
     }
 }
+
+    
+
 
 

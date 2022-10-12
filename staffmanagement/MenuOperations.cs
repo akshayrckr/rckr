@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.IO;
-using Newtonsoft.Json.Linq;
-using System.Xml.Serialization;
-using System.Xml;
+using Library;
 
-namespace staffmanagement.DataLayer
+namespace StaffManagement
 {
     class MenuOperations
     {
@@ -48,7 +41,7 @@ namespace staffmanagement.DataLayer
                 Console.WriteLine("Please enter staff position");
                 string position = Console.ReadLine();
                 sf = new Support(Staff_ID, name, addr, email, ph, position);
-                //sf.AddStaff(employee, sf);
+                
 
             }
             else if (input2.Equals(2))
@@ -56,14 +49,14 @@ namespace staffmanagement.DataLayer
                 Console.WriteLine("Please enter experience");
                 int exp = Convert.ToInt32(Console.ReadLine());
                 sf = new Teaching(Staff_ID, name, addr, email, ph, exp);
-                //sf.AddStaff(employee, sf);
+                
             }
             else if (input2.Equals(3))
             {
                 Console.WriteLine("Please enter privelage level");
                 string priv = Console.ReadLine();
                 sf = new Admin(Staff_ID, name, addr, email, ph, priv);
-                //sf.AddStaff(employee, sf);
+               
             }
             else if (input2.Equals(5))
             {

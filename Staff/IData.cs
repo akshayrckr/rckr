@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace staffmanagement
+namespace Library
 {
-    interface IData 
+    public interface IData 
     {
         public void Create(Staff staffToCreate);
         public void Update(Staff staffToUpdate);
