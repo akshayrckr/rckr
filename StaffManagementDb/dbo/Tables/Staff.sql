@@ -4,7 +4,12 @@
     [Email]   VARCHAR (40) NULL,
     [Address] VARCHAR (50) NULL,
     [Phone]   VARCHAR (50) NULL,
-    [Type]    VARCHAR (15) NULL,
-    PRIMARY KEY CLUSTERED ([StaffId] ASC)
+    [RoleId]  INT          NULL,
+    PRIMARY KEY CLUSTERED ([StaffId] ASC),
+    FOREIGN KEY ([RoleId]) REFERENCES [dbo].[Roles] ([RoleId])
 );
+
+
+
+
 
