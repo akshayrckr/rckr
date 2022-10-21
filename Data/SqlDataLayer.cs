@@ -67,22 +67,19 @@ namespace Data.Impl
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
 
-                    do
-                    {
-
 
                         while (reader.Read())
                         {
-                            string Name = reader.GetValue(reader.GetOrdinal("Name")).ToString();
-                            string Email = reader.GetValue(reader.GetOrdinal("Email")).ToString();
-                            string Phone = reader.GetValue(reader.GetOrdinal("Phone")).ToString();
-                            string Address = reader.GetValue(reader.GetOrdinal("Address")).ToString();
-                            string Role = reader.GetValue(reader.GetOrdinal("Role")).ToString();
+                            string Name = reader["Name"].ToString();
+                            string Email = reader["Email"].ToString();
+                            string Phone = reader["Phone"].ToString();
+                            string Address = reader["Address"].ToString();
+                            string Role = reader["Role"].ToString();
 
                             switch (Role)
                             {
                                 case "Support":
-                                    string position = reader.GetValue(reader.GetOrdinal("Position")).ToString();
+                                    string position = reader["Position"].ToString();
                                     Staff sp = new Support(staffIdToRead, Name, Address, Email, Phone, position);
                                     return sp;
 
@@ -93,7 +90,7 @@ namespace Data.Impl
                                     return ad;
 
                                 case "Teacher":
-                                    int Experience = (int)reader.GetValue(reader.GetOrdinal("Experience"));
+                                    int Experience = (int)reader["Experience"];
                                     Staff tc = new Teaching(staffIdToRead, Name, Address, Email, Phone, Experience);
                                     return tc;
 
@@ -101,7 +98,7 @@ namespace Data.Impl
                                     return null;
                             }
                         }
-                    } while (reader.NextResult());
+                    
 
                     command.ExecuteNonQuery();
                     cnn.Close();
@@ -126,18 +123,17 @@ namespace Data.Impl
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
 
-                    do
-                    {
+                   
 
 
                         while (reader.Read())
                         {
-                            int StaffId = (int)reader.GetValue(reader.GetOrdinal("Staffid"));
-                            string Name = reader.GetValue(reader.GetOrdinal("Name")).ToString();
-                            string Email = reader.GetValue(reader.GetOrdinal("Email")).ToString();
-                            string Phone = reader.GetValue(reader.GetOrdinal("Phone")).ToString();
-                            string Address = reader.GetValue(reader.GetOrdinal("Address")).ToString();
-                            string Role = reader.GetValue(reader.GetOrdinal("Role")).ToString();
+                            int StaffId = (int)reader["Staffid"];
+                            string Name = reader["Name"].ToString();
+                            string Email = reader["Email"].ToString();
+                            string Phone = reader["Phone"].ToString();
+                            string Address = reader["Address"].ToString();
+                            string Role = reader["Role"].ToString();
 
                             switch (Role)
                             {
@@ -153,7 +149,7 @@ namespace Data.Impl
                                     Staffs.Add(ad);
                                     break;
                                 case "Teacher":
-                                    int Experience = (int)reader.GetValue(reader.GetOrdinal("Experience"));
+                                    int Experience = (int)reader["Experience"];
                                     Staff tc = new Teaching(StaffId, Name, Address, Email, Phone, Experience);
                                     Staffs.Add(tc);
                                     break;
@@ -162,7 +158,7 @@ namespace Data.Impl
                                     break;
                             }
                         }
-                    } while (reader.NextResult());
+                    
                    
                     
                     
@@ -188,45 +184,40 @@ namespace Data.Impl
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
 
-                    do
+
+
+                    while (reader.Read())
                     {
+                        int StaffId = (int)reader["Staffid"];
+                        string Name = reader["Name"].ToString();
+                        string Email = reader["Email"].ToString();
+                        string Phone = reader["Phone"].ToString();
+                        string Address = reader["Address"].ToString();
+                        string Role = reader["Role"].ToString();
 
-
-                        while (reader.Read())
+                        switch (Role)
                         {
-                            string Name = reader.GetValue(reader.GetOrdinal("Name")).ToString();
-                            string Email = reader.GetValue(reader.GetOrdinal("Email")).ToString();
-                            string Phone = reader.GetValue(reader.GetOrdinal("Phone")).ToString();
-                            string Address = reader.GetValue(reader.GetOrdinal("Address")).ToString();
-                            string Role = reader.GetValue(reader.GetOrdinal("Role")).ToString();
-                            int StaffId = (int)reader.GetValue(reader.GetOrdinal("StaffId"));
+                            case "Support":
+                                string position = reader["Position"].ToString();
+                                Staff sp = new Support(StaffId, Name, Address, Email, Phone, position);
+                                staffs.Add(sp);
+                                break;
 
-                            switch (Role)
-                            {
-                                case "Support":
-                                    string position = reader.GetValue(reader.GetOrdinal("Position")).ToString();
-                                    Staff sp = new Support(StaffId, Name, Address, Email, Phone, position);
-                                    staffs.Add(sp);
-                                    break;
+                            case "Admin":
+                                string privelage = reader["Privelage"].ToString();
+                                Staff ad = new Admin(StaffId, Name, Address, Email, Phone, privelage);
+                                staffs.Add(ad);
+                                break;
+                            case "Teacher":
+                                int Experience = (int)reader["Experience"];
+                                Staff tc = new Teaching(StaffId, Name, Address, Email, Phone, Experience);
+                                staffs.Add(tc);
+                                break;
 
-
-                                case "Admin":
-                                    string privelage = reader["Privelage"].ToString();
-                                    Staff ad = new Admin(StaffId, Name, Address, Email, Phone, privelage);
-                                    staffs.Add(ad);
-                                    break;
-
-                                case "Teacher":
-                                    int Experience = (int)reader.GetValue(reader.GetOrdinal("Experience"));
-                                    Staff tc = new Teaching(StaffId, Name, Address, Email, Phone, Experience);
-                                    staffs.Add(tc);
-                                    break;
-
-                                default:
-                                    break;
-                            }
+                            default:
+                                break;
                         }
-                    } while (reader.NextResult());
+                    }
                     return staffs;
                     //command.ExecuteNonQuery();
                     cnn.Close();
